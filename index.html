@@ -162,6 +162,7 @@
       <div>
         <h2>Which one should we <em>take forward?</em></h2>
         <p>Each button opens an email draft. Add anything you liked or didn't, then send.</p>
+        <p>Email app not opening? Write to <strong style="color:var(--paper)">aiya.fde@gmail.com</strong> <button class="btn btn-line" id="copy-mail" style="min-height:30px;padding:0 12px;font-size:12px;margin-left:6px">Copy</button></p>
       </div>
       <div class="actions">
         <a class="btn btn-lime" data-vote="Version 1">I prefer version 1</a>
@@ -174,7 +175,7 @@
 
   <script>
     (function () {
-      var FEEDBACK_EMAIL = "junycustomersup@gmail.com";
+      var FEEDBACK_EMAIL = "aiya.fde@gmail.com";
       var SITES = {
         v1: { url: "v1/", name: "Version 1", by: "Codex" },
         v2: { url: "v2/", name: "Version 2", by: "Claude" }
@@ -256,6 +257,10 @@
         });
       });
       document.getElementById("reload").addEventListener("click", render);
+      document.getElementById("copy-mail").addEventListener("click", function () {
+        var b = this;
+        if (navigator.clipboard) navigator.clipboard.writeText(FEEDBACK_EMAIL).then(function () { b.textContent = "Copied"; });
+      });
       narrow.addEventListener("change", function () {
         if (narrow.matches && state.mode === "split") state.mode = "v2";
         render();
